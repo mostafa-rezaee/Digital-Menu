@@ -5,13 +5,17 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiMenu.Domain", "DigiMenu.Dommain\DigiMenu.Domain.csproj", "{DFF483CA-A04E-4FBC-AA48-9472A1888A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiMenu.Application", "DigiMenu.Application\DigiMenu.Application.csproj", "{873590EB-17CB-4B08-B737-C2B27D46927B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiMenu.Application", "DigiMenu.Application\DigiMenu.Application.csproj", "{873590EB-17CB-4B08-B737-C2B27D46927B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiMenu.Infrastracture", "DigiMenu.Infrastracture\DigiMenu.Infrastracture.csproj", "{684A21D3-5B07-4F3D-BD33-83BF7866BD83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiMenu.Infrastracture", "DigiMenu.Infrastracture\DigiMenu.Infrastracture.csproj", "{684A21D3-5B07-4F3D-BD33-83BF7866BD83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiMenu.Query", "DigiMenu.Query\DigiMenu.Query.csproj", "{C515CDC3-401D-4F4E-B97C-5919E1303693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiMenu.Query", "DigiMenu.Query\DigiMenu.Query.csproj", "{C515CDC3-401D-4F4E-B97C-5919E1303693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiMenu.Presentation.Facade", "DigiMenu.Presentation.Facade\DigiMenu.Presentation.Facade.csproj", "{DF71498B-E74E-4EE3-A67F-14B19E659322}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiMenu.Presentation.Facade", "DigiMenu.Presentation.Facade\DigiMenu.Presentation.Facade.csproj", "{DF71498B-E74E-4EE3-A67F-14B19E659322}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2C788AC-D0AA-477C-BB96-C8B12E468FBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain", "Common\Common.Domain\Common.Domain.csproj", "{3DD4F9C1-CFE6-467D-B14E-92D404D50382}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{DF71498B-E74E-4EE3-A67F-14B19E659322}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF71498B-E74E-4EE3-A67F-14B19E659322}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF71498B-E74E-4EE3-A67F-14B19E659322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DD4F9C1-CFE6-467D-B14E-92D404D50382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DD4F9C1-CFE6-467D-B14E-92D404D50382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DD4F9C1-CFE6-467D-B14E-92D404D50382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DD4F9C1-CFE6-467D-B14E-92D404D50382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DD4F9C1-CFE6-467D-B14E-92D404D50382} = {E2C788AC-D0AA-477C-BB96-C8B12E468FBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4390CD2B-BE51-4920-A8D4-DD7432F36809}
