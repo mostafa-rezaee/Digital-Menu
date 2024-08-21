@@ -20,7 +20,7 @@ namespace DigiMenu.Domain.CategoryAgg
         }
 
         public string Title { get; private set; }
-        public bool IsVisible { get; private set; }
+        public bool IsVisible { get; private set; } = true;
         public SeoData SeoData { get; private set; }
 
         #region Methods

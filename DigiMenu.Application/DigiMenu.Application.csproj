@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\Create\" />
-    <Folder Include="Categories\Edit\" />
     <Folder Include="PageSettings\Create\" />
     <Folder Include="PageSettings\Edit\" />
     <Folder Include="Products\Create\" />
@@ -20,6 +18,11 @@
     <Folder Include="Users\Create\" />
     <Folder Include="Users\Edit\" />
     <Folder Include="Users\RegisterUser\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Application\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\DigiMenu.Dommain\DigiMenu.Domain.csproj" />
   </ItemGroup>
 
 </Project>
