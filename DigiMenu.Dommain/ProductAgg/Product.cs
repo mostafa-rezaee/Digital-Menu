@@ -14,7 +14,8 @@ namespace DigiMenu.Domain.ProductAgg
         public Product(string title, long categoryId, string imageName, decimal price, int likeCount, bool isVisible, 
                         string description, SeoData seoData)
         {
-            HandleValidating(title, imageName, price, description);
+            NullOrEmptyException.CheckNotEmpty(imageName, nameof(imageName));
+            HandleValidating(title, price, description);
 
             Title = title;
             CategoryId = categoryId;
@@ -36,21 +37,29 @@ namespace DigiMenu.Domain.ProductAgg
         public SeoData SeoData { get; private set; }
         public List<ProductImage> ProductImages { get; private set; }
 
+        //When we have any product specification
+        //public List<ProductSpecification> ProductSpecification { get; private set; }
+
         #region Methods
 
-        public void Edit(string title, long categoryId, string imageName, decimal price, int likeCount, bool isVisible,
+        public void Edit(string title, long categoryId, decimal price, int likeCount, bool isVisible,
                         string description, SeoData seoData)
         {
-            HandleValidating(title, imageName, price, description);
+            HandleValidating(title, price, description);
 
             Title = title;
             CategoryId = categoryId;
-            ImageName = imageName;
             Price = price;
             LikeCount = likeCount;
             IsVisible = isVisible;
             Description = description;
             SeoData = seoData;
+        }
+
+        public void SetProductImage(string imageName)
+        {
+            NullOrEmptyException.CheckNotEmpty(imageName, nameof(imageName));
+            ImageName = imageName;
         }
 
         public void AddImage(ProductImage image)
@@ -66,11 +75,10 @@ namespace DigiMenu.Domain.ProductAgg
             ProductImages.Remove(image);
         }
 
-        public void HandleValidating(string title, string imageName, decimal price, string description)
+        public void HandleValidating(string title, decimal price, string description)
         {
-            NullOrEmptyException.CheckNotEmpty(title, nameof(imageName));
-            NullOrEmptyException.CheckNotEmpty(imageName, nameof(imageName));
-            NullOrEmptyException.CheckNotEmpty(description, nameof(imageName));
+            NullOrEmptyException.CheckNotEmpty(title, nameof(title));
+            NullOrEmptyException.CheckNotEmpty(description, nameof(description));
             if (price <= 0)
                 throw new InvalidDomainDataException("این مبلغ مجاز نیست");
         }

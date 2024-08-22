@@ -19,5 +19,6 @@ namespace Common.Domain.Repositories
         Task<bool> IsExistAsync(Expression<Func<T, bool>> expression);
         bool IsExist(Expression<Func<T, bool>> expression);
         T GetById(long id);
+        Task<IList<T>> GetAllAsync();
     }
 }
