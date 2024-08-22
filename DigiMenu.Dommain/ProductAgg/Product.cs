@@ -68,14 +68,15 @@ namespace DigiMenu.Domain.ProductAgg
             ProductImages.Add(image);
         }
 
-        public void RemoveImage(long imageId)
+        public string RemoveImage(long imageId)
         {
             var image = ProductImages.FirstOrDefault(x => x.Id == imageId);
-            if (image == null) return;
+            if (image == null) throw new NullOrEmptyException("تصویر یافت نشد");
             ProductImages.Remove(image);
+            return image.ImageName;
         }
 
-        public void HandleValidating(string title, decimal price, string description)
+        private void HandleValidating(string title, decimal price, string description)
         {
             NullOrEmptyException.CheckNotEmpty(title, nameof(title));
             NullOrEmptyException.CheckNotEmpty(description, nameof(description));

@@ -10,5 +10,7 @@ namespace DigiMenu.Application._Helpers
     public class Directories
     {
         public const string ProductImage = "wwwroot/images/products";
+
+        public const string ProductImageGallery = "wwwroot/images/products/gallery";
     }
 }
