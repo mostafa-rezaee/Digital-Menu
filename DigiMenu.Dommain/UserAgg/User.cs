@@ -18,12 +18,14 @@ namespace DigiMenu.Domain.UserAgg
             LastName = lastName;
             Username = username;
             Password = password;
+            AvatarName = "avatar.png";
         }
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Username { get; private set; }
         public string Password { get; private set; }
+        public string AvatarName { get; private set; }
         public List<UserRole> Roles { get; private set; }
 
         #region Methods
@@ -41,6 +43,15 @@ namespace DigiMenu.Domain.UserAgg
             roles.ForEach(role => role.UserId = Id);
             Roles.Clear();
             Roles.AddRange(roles);
+        }
+
+        public void SetAvatarImage(string avatar)
+        {
+            if (string.IsNullOrWhiteSpace(avatar))
+            {
+                avatar = "avatar.png";
+            }
+            AvatarName = avatar;
         }
 
         public void HandlePropertiesValidation(string username, IDomainUseService userService, string? password = null)

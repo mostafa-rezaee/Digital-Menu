@@ -2,7 +2,7 @@
 
 namespace Common.Domain.ValueObjects
 {
-    public class SeoData
+    public class SeoData : BaseValueObject<SeoData>
     {
         private SeoData() { }
         public static SeoData MakeEmpty()
