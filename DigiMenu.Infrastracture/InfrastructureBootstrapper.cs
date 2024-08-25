@@ -16,6 +16,7 @@ using DigiMenu.Domain.RoleAgg.Repositories;
 using DigiMenu.Infrastracture.Persistent.EF.RoleAgg;
 using DigiMenu.Domain.UserAgg.Repositories;
 using DigiMenu.Infrastracture.Persistent.EF.UserAgg;
+using DigiMenu.Infrastracture.Persistent.Dapper;
 
 namespace DigiMenu.Infrastracture
 {
@@ -28,10 +29,11 @@ namespace DigiMenu.Infrastracture
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-
-            //services.AddDbContext<DigiMenuContext>(optionsAction => {
-            //    optionsAction.UseSqlServer(connectionString);
-            //});
+            services.AddTransient(_ => new DapperContext(connectionString));
+            services.AddDbContext<DigiMenuContext>(optionsAction =>
+            {
+                optionsAction.UseSqlServer(connectionString);
+            });
 
         }
     }
