@@ -8,6 +8,9 @@ namespace DigiMenu.Application.PageSettings.Create
         public CreatePageSettingCommandValidator()
         {
             RuleFor(x => x.pageTitle).NotNull().NotEmpty().WithMessage(ValidationMessages.required("عنوان صفحه"));
+            RuleFor(x => x.backgroundImage).JustImageFile();
+            RuleFor(x => x.logoImage).JustImageFile();
+
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.PageSettingAgg
 {
-    public interface IPageSettingRepository : IBaseRepository<PageSetting>
+    public interface IPageSettingRepository : BaseRepository<PageSetting>
     {
     }
 }

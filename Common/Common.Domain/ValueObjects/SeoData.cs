@@ -19,12 +19,12 @@ namespace Common.Domain.ValueObjects
             Schema = schema;
         }
 
-        public string MetaDescription { get; private set; }
-        public string MetaTitle { get; private set; }
-        public string MetaKeywords { get; private set; }
+        public string? MetaDescription { get; private set; }
+        public string? MetaTitle { get; private set; }
+        public string? MetaKeywords { get; private set; }
         public bool IsIndexed { get; private set; }
-        public string Canonicial { get; private set; }
-        public string Schema { get; private set; }
+        public string? Canonicial { get; private set; }
+        public string? Schema { get; private set; }
 
     }
 }

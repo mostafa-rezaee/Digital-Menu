@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.ProductAgg.Repositories
 {
-    public interface IProductRepository : IBaseRepository<Product>
+    public interface IProductRepository : BaseRepository<Product>
     {
     }
 }

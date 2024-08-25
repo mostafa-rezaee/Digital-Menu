@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.CategoryAgg
 {
-    public interface ICategoryRepository : IBaseRepository<Category>
+    public interface ICategoryRepository : BaseRepository<Category>
     {
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using Common.Domain.ValueObjects;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Application.Categories.Edit
 {
-    public record EditCategoryCommand(long Id, string title, bool isVisible, SeoData seoData) : IBaseCommand;
+    public record EditCategoryCommand(long id, string title, IFormFile? image, bool isVisible, SeoData seoData) : IBaseCommand;
 
 }

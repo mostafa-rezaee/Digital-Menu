@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.UserAgg.Repositories
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : BaseRepository<User>
     {
     }
 }

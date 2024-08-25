@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using Common.Domain.ValueObjects;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Application.Categories.Create
 {
-    public  record CreateCategoryCommand(string title, bool isVisible, SeoData seoData) : IBaseCommand;
+    public  record CreateCategoryCommand(string title, IFormFile image, bool isVisible, SeoData seoData) : IBaseCommand;
 }

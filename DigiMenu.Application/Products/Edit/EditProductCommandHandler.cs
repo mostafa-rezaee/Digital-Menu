@@ -18,7 +18,7 @@ namespace DigiMenu.Application.Products.Edit
         }
         public async Task<OperationResult> Handle(EditProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _repository.GetTrackingAsync(request.productId);
+            var product = await _repository.GetTrackingAsync(request.id);
             if (product == null)
             {
                 return OperationResult.NotFound();

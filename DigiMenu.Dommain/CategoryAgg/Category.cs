@@ -11,15 +11,18 @@ namespace DigiMenu.Domain.CategoryAgg
 {
     public class Category : AggregateRoot
     {
-        public Category(string title, bool isVisible, SeoData seoData)
+        public Category(string title, string imageName, bool isVisible, SeoData seoData)
         {
             NullOrEmptyException.CheckNotEmpty(title, nameof(title));
             Title = title;
+            ImageName = imageName;
             IsVisible = isVisible;
             SeoData = seoData;
         }
 
         public string Title { get; private set; }
+        public string ImageName { get; private set; }
+
         public bool IsVisible { get; private set; } = true;
         public SeoData SeoData { get; private set; }
 
@@ -30,6 +33,12 @@ namespace DigiMenu.Domain.CategoryAgg
             Title = title;
             IsVisible = isVisible;
             SeoData = seoData;
+        }
+
+        public void SetCategoryImage(string imageName)
+        {
+            NullOrEmptyException.CheckNotEmpty(imageName, nameof(imageName));
+            ImageName = imageName;
         }
 
         #endregion

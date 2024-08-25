@@ -9,9 +9,13 @@ namespace DigiMenu.Application._Helpers
 {
     public class Directories
     {
+        public const string PageImage = "wwwroot/images/page";
+
         public const string ProductImage = "wwwroot/images/products";
 
         public const string ProductImageGallery = "wwwroot/images/products/gallery";
+
+        public const string CategoryImage = "wwwroot/images/categories";
 
         public const string AvatarImage = "wwwroot/images/users/avatars";
     }

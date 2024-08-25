@@ -13,6 +13,7 @@ namespace DigiMenu.Application.Categories.Create
         public CreateCategoryCommandValidator() 
         {
             RuleFor(c => c.title).NotNull().NotEmpty().WithMessage(ValidationMessages.required("عنوان"));
+            RuleFor(c => c.image).JustImageFile();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.RoleAgg.Repositories
 {
-    public interface IRolePermissionRepository : IBaseRepository<RolePermission>
+    public interface IRolePermissionRepository : BaseRepository<RolePermission>
     {
     }
 }
