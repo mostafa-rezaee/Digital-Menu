@@ -19,6 +19,7 @@ namespace DigiMenu.Domain.UserAgg
             Username = username;
             Password = password;
             AvatarName = "avatar.png";
+            IsActive = true;
         }
 
         public string FirstName { get; private set; }
@@ -26,6 +27,7 @@ namespace DigiMenu.Domain.UserAgg
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string AvatarName { get; private set; }
+        public bool IsActive { get; private set; }
         public List<UserRole> Roles { get; private set; }
 
         #region Methods
