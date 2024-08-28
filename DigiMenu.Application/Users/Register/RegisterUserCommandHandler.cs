@@ -8,9 +8,9 @@ namespace DigiMenu.Application.Users.Register
     public class RegisterUserCommandHandler : IBaseCommandHandler<RegisterUserCommand>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IDomainUseService _domainUseService;
+        private readonly IUserDomainService _domainUseService;
 
-        public RegisterUserCommandHandler(IUserRepository userRepository, IDomainUseService domainUseService)
+        public RegisterUserCommandHandler(IUserRepository userRepository, IUserDomainService domainUseService)
         {
             _userRepository = userRepository;
             _domainUseService = domainUseService;

@@ -12,10 +12,10 @@ namespace DigiMenu.Application.Users.Edit
     public class EditUserCommandHandler : IBaseCommandHandler<EditUserCommand>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IDomainUseService _domainUseService;
+        private readonly IUserDomainService _domainUseService;
         private readonly IFileService _fileService;
 
-        public EditUserCommandHandler(IUserRepository userRepository, IDomainUseService domainUseService, IFileService fileService)
+        public EditUserCommandHandler(IUserRepository userRepository, IUserDomainService domainUseService, IFileService fileService)
         {
             _userRepository = userRepository;
             _domainUseService = domainUseService;

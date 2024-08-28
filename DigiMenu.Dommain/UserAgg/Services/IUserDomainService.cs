@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Domain.UserAgg.Services
 {
-    public interface IDomainUseService
+    public interface IUserDomainService
     {
         public bool IsUsernameExist(string username);
     }

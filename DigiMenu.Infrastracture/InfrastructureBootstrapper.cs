@@ -22,7 +22,7 @@ namespace DigiMenu.Infrastracture
 {
     public class InfrastructureBootstrapper
     {
-        public InfrastructureBootstrapper(IServiceCollection services, string connectionString) 
+        public static void Initialaize(IServiceCollection services, string connectionString) 
         {
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IPageSettingRepository, PageSettingRepository>();

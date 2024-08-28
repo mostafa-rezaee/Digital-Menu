@@ -32,7 +32,7 @@ namespace DigiMenu.Infrastracture.Persistent.EF.ProductAgg
             builder.Property(p => p.CategoryId).IsRequired();
             builder.Property(p => p.Title).HasMaxLength(100).IsRequired();
             builder.Property(p => p.ImageName).HasMaxLength(200).IsRequired();
-            builder.Property(p => p.Price).IsRequired();
+            builder.Property(p => p.Price).HasColumnType(typeof(decimal).Name).HasPrecision(18, 0).IsRequired();
 
 
         }

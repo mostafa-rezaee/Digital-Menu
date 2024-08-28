@@ -9,9 +9,9 @@ namespace DigiMenu.Application.Users.Create
     public class EditUserCommandHandler : IBaseCommandHandler<EditUserCommand>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IDomainUseService _domainUseService;
+        private readonly IUserDomainService _domainUseService;
 
-        public EditUserCommandHandler(IUserRepository userRepository, IDomainUseService domainUseService)
+        public EditUserCommandHandler(IUserRepository userRepository, IUserDomainService domainUseService)
         {
             _userRepository = userRepository;
             _domainUseService = domainUseService;

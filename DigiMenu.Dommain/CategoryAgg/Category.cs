@@ -11,6 +11,7 @@ namespace DigiMenu.Domain.CategoryAgg
 {
     public class Category : AggregateRoot
     {
+        private Category() { }
         public Category(string title, string imageName, bool isVisible, SeoData seoData)
         {
             NullOrEmptyException.CheckNotEmpty(title, nameof(title));

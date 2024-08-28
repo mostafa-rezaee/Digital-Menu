@@ -11,6 +11,7 @@ namespace DigiMenu.Domain.ProductAgg
 {
     public class Product : AggregateRoot
     {
+        private Product() { }
         public Product(string title, long categoryId, string imageName, decimal price, int likeCount, bool isVisible, 
                         string description, SeoData seoData)
         {
@@ -31,9 +32,9 @@ namespace DigiMenu.Domain.ProductAgg
         public long CategoryId { get; private set; }
         public string ImageName { get; private set; }
         public decimal Price { get; private set; }
-        public int LikeCount { get; private set; }
-        public bool IsVisible { get; private set; }
-        public string Description { get; private set; }
+        public int? LikeCount { get; private set; }
+        public bool? IsVisible { get; private set; }
+        public string? Description { get; private set; }
         public SeoData SeoData { get; private set; }
         public List<ProductImage> ProductImages { get; private set; }
 

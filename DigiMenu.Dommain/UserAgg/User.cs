@@ -11,7 +11,8 @@ namespace DigiMenu.Domain.UserAgg
 {
     public class User : AggregateRoot
     {
-        public User(string firstName, string lastName, string username, string password, IDomainUseService userService)
+        private User() { }
+        public User(string firstName, string lastName, string username, string password, IUserDomainService userService)
         {
             HandlePropertiesValidation(username, userService, password);
             FirstName = firstName;
@@ -32,7 +33,7 @@ namespace DigiMenu.Domain.UserAgg
 
         #region Methods
 
-        public void Edit(string firstName, string lastName, string username, IDomainUseService userService)
+        public void Edit(string firstName, string lastName, string username, IUserDomainService userService)
         {
             HandlePropertiesValidation(username, userService);
             FirstName = firstName;
@@ -56,7 +57,7 @@ namespace DigiMenu.Domain.UserAgg
             AvatarName = avatar;
         }
 
-        public void HandlePropertiesValidation(string username, IDomainUseService userService, string? password = null)
+        public void HandlePropertiesValidation(string username, IUserDomainService userService, string? password = null)
         {
             NullOrEmptyException.CheckNotEmpty(username, nameof(username));
             if (password != null)
@@ -74,7 +75,7 @@ namespace DigiMenu.Domain.UserAgg
 
         }
 
-        public static User RegisterUser(string username, string password, IDomainUseService userService)
+        public static User RegisterUser(string username, string password, IUserDomainService userService)
         {
             return new User("", "", username, password, userService);
         }

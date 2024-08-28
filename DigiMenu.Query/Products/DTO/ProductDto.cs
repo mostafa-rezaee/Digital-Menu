@@ -16,9 +16,9 @@ namespace DigiMenu.Query.Products.DTO
         public long CategoryId { get;  set; }
         public string ImageName { get; set; }
         public decimal Price { get; set; }
-        public int LikeCount { get; set; }
-        public bool IsVisible { get; set; }
-        public string Description { get; set; }
+        public int? LikeCount { get; set; }
+        public bool? IsVisible { get; set; }
+        public string? Description { get; set; }
         public SeoData SeoData { get; set; }
         public CategoryDto Category { get; set; }
         public List<ProductImageDto> ProductImages { get; set; }

@@ -5,6 +5,7 @@ namespace DigiMenu.Domain.RoleAgg
 {
     public class RolePermission : BaseEntity
     {
+        private RolePermission() { }
         public RolePermission(Permissions permission)
         {
             Permission = permission;

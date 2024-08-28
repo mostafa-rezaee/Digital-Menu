@@ -10,6 +10,7 @@ namespace DigiMenu.Domain.PageSettingAgg
 {
     public class PageSetting : AggregateRoot
     {
+        private PageSetting() { }
         public PageSetting(string pageTitle, string backroundImageName, string logoImageName, string websiteAddress, 
                 string socialTitle, string socialAddress, string telephone, string address)
         {

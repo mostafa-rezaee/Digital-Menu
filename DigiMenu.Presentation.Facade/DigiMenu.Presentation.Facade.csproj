@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DigiMenu.Application\DigiMenu.Application.csproj" />
+    <ProjectReference Include="..\DigiMenu.Query\DigiMenu.Query.csproj" />
+  </ItemGroup>
+
 </Project>
