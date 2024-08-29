@@ -9,5 +9,6 @@ namespace DigiMenu.Domain.UserAgg.Repositories
 {
     public interface IUserRepository : BaseRepository<User>
     {
+
     }
 }
