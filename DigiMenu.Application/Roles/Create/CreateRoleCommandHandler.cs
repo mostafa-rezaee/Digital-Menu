@@ -4,16 +4,16 @@ using DigiMenu.Domain.RoleAgg.Repositories;
 
 namespace DigiMenu.Application.Roles.Create
 {
-    public class EditRoleCommandHandler : IBaseCommandHandler<EditRoleCommand>
+    public class CreateRoleCommandHandler : IBaseCommandHandler<CreateRoleCommand>
     {
         private readonly IRoleRepository _roleRepository;
 
-        public EditRoleCommandHandler(IRoleRepository roleRepository)
+        public CreateRoleCommandHandler(IRoleRepository roleRepository)
         {
             _roleRepository = roleRepository;
         }
 
-        public async Task<OperationResult> Handle(EditRoleCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
             var permissionList = new List<RolePermission>();
             request.permissions.ForEach(x =>

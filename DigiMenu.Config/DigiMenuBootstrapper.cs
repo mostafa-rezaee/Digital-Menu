@@ -3,6 +3,7 @@ using DigiMenu.Application.Users;
 using DigiMenu.Domain.UserAgg.Services;
 using DigiMenu.Infrastracture;
 using DigiMenu.Query.Categories.GetById;
+using DigiMenu.Presentation.Facade;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,8 @@ namespace DigiMenu.Config
 
             services.AddTransient<IUserDomainService, UserDomainService>();
             services.AddValidatorsFromAssembly(typeof(Directories).Assembly);
+
+            services.InitialaizeFacadeDependency();
         }
     }
 }

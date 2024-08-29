@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DigiMenu.Application.Users.Create
 {
-    public class EditUserCommandValidator : AbstractValidator<EditUserCommand>
+    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
-        public EditUserCommandValidator()
+        public CreateUserCommandValidator()
         {
             RuleFor(x => x.FirstName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام"));
             RuleFor(x => x.LastName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام خانوادگی"));

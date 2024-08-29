@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Application.Roles.Create
 {
-    public record EditRoleCommand(string title, List<Permissions> permissions) : IBaseCommand;
+    public record CreateRoleCommand(string title, List<Permissions> permissions) : IBaseCommand;
 }

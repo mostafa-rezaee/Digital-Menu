@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DigiMenu.Application.Roles.Create
 {
-    public class EditRoleCommandValidator : AbstractValidator<EditRoleCommand> 
+    public class CreateRoleCommandValidator : AbstractValidator<CreateRoleCommand> 
     {
-        public EditRoleCommandValidator()
+        public CreateRoleCommandValidator()
         {
             RuleFor(x => x.title).NotNull().NotEmpty().WithMessage(ValidationMessages.required("عنوان"));
 
