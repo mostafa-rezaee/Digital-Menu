@@ -1,4 +1,6 @@
 ﻿using Common.Application;
+using DigiMenu.Application.Users.AddToken;
+using DigiMenu.Application.Users.ChangePassword;
 using DigiMenu.Application.Users.Create;
 using DigiMenu.Application.Users.Edit;
 using DigiMenu.Application.Users.Register;
@@ -55,6 +57,14 @@ namespace DigiMenu.Presentation.Facade.Users
             return await _mediator.Send(new GetUserByUsernameQuery(username));
         }
 
-        
+        public async Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        public async Task<OperationResult> AddTokens(AddUserTokenCommand command)
+        {
+            return await _mediator.Send(command);
+        }
     }
 }

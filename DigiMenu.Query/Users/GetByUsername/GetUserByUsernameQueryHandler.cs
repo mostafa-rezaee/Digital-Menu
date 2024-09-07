@@ -18,7 +18,8 @@ namespace DigiMenu.Query.Users.GetByUsername
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.username, cancellationToken);
             if (user == null) return null;
-            return await user.Map().SetUserRoleTitles(_context);
+            var result = await user.Map().SetUserRoleTitles(_context);
+            return result;
         }
     }
 }

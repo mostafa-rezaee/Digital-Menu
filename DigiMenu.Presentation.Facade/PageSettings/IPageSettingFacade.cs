@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Presentation.Facade.PageSettings
 {
-    internal interface IPageSettingFacade
+    public interface IPageSettingFacade
     {
         //Commands
         Task<OperationResult> Create(CreatePageSettingCommand command);

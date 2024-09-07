@@ -48,7 +48,7 @@ namespace DigiMenu.Query.Users
         public static async Task<UserDto> SetUserRoleTitles(this UserDto userDto, DigiMenuContext context)
         {
             var roleIds = userDto.Roles.Select(r => r.RoleId);
-            var result = await context.Roles.Where(r => roleIds.Contains(r.Id)).ToListAsync();
+            var result = await context.Roles.Where(r => roleIds.Any() && roleIds.Contains(r.Id)).ToListAsync();
             var roles = new List<UserRoleDto>();
             foreach (var role in result)
             {

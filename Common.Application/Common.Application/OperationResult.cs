@@ -9,7 +9,7 @@ namespace Common.Application
     public class OperationResult<TData>
     {
         public const string SuccessMessage = "عملیات با موفقیت انجام شد";
-        public const string ErrorMessage = "عملیات با شکست مواجه شد";
+        public const string ErrorMessage = "عملیات با خطا مواجه شد";
 
         public string Message { get; set; }
         public string Title { get; set; } = null;

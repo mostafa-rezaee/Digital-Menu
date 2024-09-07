@@ -9,5 +9,6 @@ namespace DigiMenu.Domain.CategoryAgg
 {
     public interface ICategoryRepository : BaseRepository<Category>
     {
+        Task<bool> Delete(long id);
     }
 }

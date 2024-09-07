@@ -16,7 +16,7 @@ namespace Common.Application.Utilities.Security
             var encodedBytes = sha256.ComputeHash(originalBytes);
             return Convert.ToBase64String(encodedBytes);
         }
-        public static bool IsEqual(string hashText, string rawText)
+        public static bool Compare(string hashText, string rawText)
         {
             var hash = Hash(rawText);
             return hashText == hash;

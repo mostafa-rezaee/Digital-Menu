@@ -22,6 +22,23 @@ namespace DigiMenu.Infrastracture.Persistent.EF.UserAgg
                 option.HasIndex(p => p.UserId);
             });
 
+            builder.OwnsMany(b => b.UserTokens, option => {
+                option.ToTable("Tokens", "user");
+                option.HasKey(b => b.Id);
+
+                option.Property(b => b.HashJwtToken)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                option.Property(b => b.HashRefreshToken)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                option.Property(b => b.Device)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
             builder.Property(p => p.FirstName).HasMaxLength(50);
             builder.Property(p => p.LastName).HasMaxLength(50);
             builder.Property(p => p.Username).IsRequired().HasMaxLength(50);

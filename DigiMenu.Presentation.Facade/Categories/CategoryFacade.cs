@@ -1,6 +1,7 @@
 ﻿using Common.Application;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
+using DigiMenu.Application.Categories.Remove;
 using DigiMenu.Query.Categories.DTO;
 using DigiMenu.Query.Categories.GetById;
 using DigiMenu.Query.Categories.GetList;
@@ -22,7 +23,7 @@ namespace DigiMenu.Presentation.Facade.Categories
             this.mediator = mediator;
         }
 
-        public async Task<OperationResult> Create(CreateCategoryCommand command)
+        public async Task<OperationResult<long>> Create(CreateCategoryCommand command)
         {
             return await mediator.Send(command);
         }
@@ -30,6 +31,11 @@ namespace DigiMenu.Presentation.Facade.Categories
         public async Task<OperationResult> Edit(EditCategoryCommand command)
         {
             return await mediator.Send(command);
+        }
+
+        public async Task<OperationResult> Remove(long id)
+        {
+            return await mediator.Send(new RemoveCategoryCommand(id));
         }
 
         public async Task<List<CategoryDto>> GetCategories()
@@ -41,5 +47,7 @@ namespace DigiMenu.Presentation.Facade.Categories
         {
             return await mediator.Send(new GetCategoryByIdQuery(id));
         }
+
+        
     }
 }

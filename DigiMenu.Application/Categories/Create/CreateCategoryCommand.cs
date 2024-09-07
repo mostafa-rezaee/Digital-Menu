@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Application.Categories.Create
 {
-    public  record CreateCategoryCommand(string title, IFormFile image, bool isVisible, SeoData seoData) : IBaseCommand;
+    public  record CreateCategoryCommand(string title, IFormFile image, bool isVisible, SeoData seoData) : IBaseCommand<long>;
 }

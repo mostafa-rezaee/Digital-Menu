@@ -1,6 +1,7 @@
 ﻿using Common.Application;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
+using DigiMenu.Application.Categories.Remove;
 using DigiMenu.Query.Categories.DTO;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,9 @@ namespace DigiMenu.Presentation.Facade.Categories
     public interface ICategoryFacade
     {
         //Commands
-        Task<OperationResult> Create(CreateCategoryCommand command);
+        Task<OperationResult<long>> Create(CreateCategoryCommand command);
         Task<OperationResult> Edit(EditCategoryCommand command);
+        Task<OperationResult> Remove(long id);
 
 
         //Queries

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DigiMenu.Application.Users.Register
+namespace DigiMenu.Application.Categories.Remove
 {
-    public record RegisterUserCommand(string username, string password) : IBaseCommand;
+    public record RemoveCategoryCommand(long id) : IBaseCommand;
 }

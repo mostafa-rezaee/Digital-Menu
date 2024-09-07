@@ -21,6 +21,8 @@ namespace DigiMenu.Domain.UserAgg
             Password = password;
             AvatarName = "avatar.png";
             IsActive = true;
+            Roles = new();
+            UserTokens = new();
         }
 
         public string FirstName { get; private set; }
@@ -29,7 +31,8 @@ namespace DigiMenu.Domain.UserAgg
         public string Password { get; private set; }
         public string AvatarName { get; private set; }
         public bool IsActive { get; private set; }
-        public List<UserRole> Roles { get; private set; }
+        public List<UserRole> Roles { get; }
+        public List<UserToken> UserTokens { get; }
 
         #region Methods
 
@@ -57,6 +60,14 @@ namespace DigiMenu.Domain.UserAgg
             AvatarName = avatar;
         }
 
+        public void AddUserToken(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
+        {
+            var token = new UserToken(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
+            token.UserId = Id;
+            UserTokens.Add(token);
+            
+        }
+
         public void HandlePropertiesValidation(string username, IUserDomainService userService, string? password = null)
         {
             NullOrEmptyException.CheckNotEmpty(username, nameof(username));
@@ -78,6 +89,13 @@ namespace DigiMenu.Domain.UserAgg
         public static User RegisterUser(string username, string password, IUserDomainService userService)
         {
             return new User("", "", username, password, userService);
+        }
+
+        public void ChangePassword(string newPassword)
+        {
+            NullOrEmptyException.CheckNotEmpty(newPassword, nameof(newPassword));
+
+            Password = newPassword;
         }
 
 
