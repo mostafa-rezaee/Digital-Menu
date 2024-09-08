@@ -10,6 +10,10 @@ namespace DigiMenu.Domain.UserAgg
 {
     public class UserToken : BaseEntity
     {
+        public UserToken()
+        {
+            
+        }
         public UserToken(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
         {
             Guard(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
