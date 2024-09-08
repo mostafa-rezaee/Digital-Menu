@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DigiMenu.Application.Users.AddToken;
+using DigiMenu.Application.Users.RemoveToken;
 
 namespace DigiMenu.Presentation.Facade.Users
 {
@@ -20,11 +21,14 @@ namespace DigiMenu.Presentation.Facade.Users
         Task<OperationResult> Edit(EditUserCommand command);
         Task<OperationResult> Register(RegisterUserCommand command);
         Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command);
-        Task<OperationResult> AddTokens(AddUserTokenCommand command);
+        Task<OperationResult> AddToken(AddUserTokenCommand command);
+        Task<OperationResult> RomoveToken(RemoveUserTokenComman command);
+
 
         //Queries
         Task<UserDto?> GetUserById(long id);
         Task<UserDto?> GetUserByUsername(string username);
+        Task<UserTokenDto?> GetUserTokenByRefreshToken(string refreshToken);
         Task<UserFilterResult> GetUserByFilter(UserFilterParams filterParams);
     }
 }

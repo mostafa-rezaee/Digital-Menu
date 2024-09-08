@@ -24,5 +24,7 @@ namespace DigiMenu.Infrastracture.Persistent.Dapper
         public string Products => "[product].Products";
 
         public string ProductImages => "[product].Images";
+
+        public string Tokens => "[user].Tokens";
     }
 }

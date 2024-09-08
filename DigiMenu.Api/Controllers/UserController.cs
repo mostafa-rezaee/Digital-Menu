@@ -24,7 +24,7 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ApiResult<UserFilterResult>> GetUsersByFilter([FromQuery]UserFilterParams filterParams)
+        public async Task<ApiResult<UserFilterResult>> GetUsers([FromQuery]UserFilterParams filterParams)
         {
             var result = await _userFacade.GetUserByFilter(filterParams);
             return QueryResult(result);

@@ -68,6 +68,13 @@ namespace DigiMenu.Domain.UserAgg
             
         }
 
+        public void RemoveUserToken(long tokenId)
+        {
+            var token = UserTokens.FirstOrDefault(x => x.Id == tokenId);
+            if (token == null) throw new InvalidDomainDataException("Invalid Token");
+            UserTokens.Remove(token);
+        }
+
         public void HandlePropertiesValidation(string username, IUserDomainService userService, string? password = null)
         {
             NullOrEmptyException.CheckNotEmpty(username, nameof(username));
