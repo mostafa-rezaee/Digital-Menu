@@ -1,4 +1,5 @@
 ﻿using Common.NetCore;
+using DigiMenu.Api.Infrastructure;
 using DigiMenu.Application.Products.Create;
 using DigiMenu.Application.Products.Edit;
 using DigiMenu.Application.Roles.Create;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    
+    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageRoles)]
     public class RoleController : BaseApiController
     {
         private readonly IRoleFacade _roleFacade;
@@ -36,14 +37,14 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> CreateProduct(CreateRoleCommand command)
+        public async Task<ApiResult> CreateRole(CreateRoleCommand command)
         {
             var result = await _roleFacade.Create(command);
             return CommandResult(result);
         }
 
         [HttpPut]
-        public async Task<ApiResult> EditProduct(EditRoleCommand command)
+        public async Task<ApiResult> EditRole(EditRoleCommand command)
         {
             var result = await _roleFacade.Edit(command);
             return CommandResult(result);

@@ -11,6 +11,8 @@ using DigiMenu.Query.Users.GetByFilter;
 using DigiMenu.Query.Users.GetById;
 using DigiMenu.Query.Users.GetByUsername;
 using DigiMenu.Query.Users.UserTokens;
+using DigiMenu.Query.Users.UserTokens.GetByJwtToken;
+using DigiMenu.Query.Users.UserTokens.GetByRefreshToken;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,12 @@ namespace DigiMenu.Presentation.Facade.Users
             return await _mediator.Send(new GetUserTokenByRefreshTokenQuery(hashedRefreshToken));
         }
 
+        public async Task<UserTokenDto?> GetUserTokenByJwtToken(string jwtToken)
+        {
+            var hashedJwtToken = ShaHasher.Hash(jwtToken);
+            return await _mediator.Send(new GetUserTokenByJwtTokenQuery(hashedJwtToken));
+        }
+
         public async Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command)
         {
             return await _mediator.Send(command);
@@ -80,5 +88,7 @@ namespace DigiMenu.Presentation.Facade.Users
         {
             return await _mediator.Send(command);
         }
+
+        
     }
 }

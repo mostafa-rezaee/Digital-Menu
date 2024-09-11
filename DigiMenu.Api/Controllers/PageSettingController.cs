@@ -1,4 +1,5 @@
 ﻿using Common.NetCore;
+using DigiMenu.Api.Infrastructure;
 using DigiMenu.Application.PageSettings.Create;
 using DigiMenu.Application.PageSettings.Edit;
 using DigiMenu.Application.Products.Create;
@@ -6,12 +7,13 @@ using DigiMenu.Application.Products.Edit;
 using DigiMenu.Presentation.Facade.PageSettings;
 using DigiMenu.Presentation.Facade.Products;
 using DigiMenu.Query.PageSettings.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    
+    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManagePageSettings)]
     public class PageSettingController : BaseApiController
     {
         private readonly IPageSettingFacade _pageSettingFacade;
@@ -21,6 +23,7 @@ namespace DigiMenu.Api.Controllers
             this._pageSettingFacade = pageSettingFacade;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ApiResult<PageSettingDto?>> GetPageSetting()
         {

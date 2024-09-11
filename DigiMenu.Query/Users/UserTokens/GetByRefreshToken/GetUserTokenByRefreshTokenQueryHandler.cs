@@ -3,7 +3,7 @@ using Dapper;
 using DigiMenu.Infrastracture.Persistent.Dapper;
 using DigiMenu.Query.Users.DTO;
 
-namespace DigiMenu.Query.Users.UserTokens
+namespace DigiMenu.Query.Users.UserTokens.GetByRefreshToken
 {
     public class GetUserTokenByRefreshTokenQueryHandler : IQueryHandler<GetUserTokenByRefreshTokenQuery, UserTokenDto?>
     {
@@ -18,7 +18,7 @@ namespace DigiMenu.Query.Users.UserTokens
         {
             using var connection = _dapperContext.CreateConnection();
             var query = $"SELECT TOP(1) * FROM {_dapperContext.Tokens}  where HashRefreshToken = @hashedRefreshToken";
-            return await connection.QueryFirstOrDefaultAsync<UserTokenDto?>(query, new { hashedRefreshToken = request.hashedRefreshToken });
+            return await connection.QueryFirstOrDefaultAsync<UserTokenDto?>(query, new { request.hashedRefreshToken });
         }
     }
 }

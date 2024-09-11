@@ -1,4 +1,5 @@
 ﻿using Common.NetCore;
+using DigiMenu.Api.Infrastructure;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
 using DigiMenu.Application.Products.AddImage;
@@ -8,11 +9,13 @@ using DigiMenu.Application.Products.RemoveImage;
 using DigiMenu.Presentation.Facade.Categories;
 using DigiMenu.Presentation.Facade.Products;
 using DigiMenu.Query.Products.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
+    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageProducts)]
     public class ProductController : BaseApiController
     {
         private readonly IProductFacade _productFacade;
@@ -22,6 +25,7 @@ namespace DigiMenu.Api.Controllers
             _productFacade = productFacade;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ApiResult<ProductFilterResult>> GetProducts([FromQuery]ProductFilterParams filterParams)
         {

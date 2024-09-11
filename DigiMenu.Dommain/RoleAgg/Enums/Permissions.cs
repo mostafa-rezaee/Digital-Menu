@@ -1,12 +1,13 @@
 ﻿namespace DigiMenu.Domain.RoleAgg.Enums
 {
-    public enum Permissions
+    public enum Permissions : byte
     {
-        Admin,
-        EditProfile,
-        ChangePassword,
-
-        AddProduct,
-        ChangePrice
+        ManageUsers = 1,
+        ManageCategories = 2,
+        ManagePageSettings = 3,
+        ManageProducts = 4,
+        ManageRoles = 5,
+        ChangePassword = 6,
+        ChangePrice = 7
     }
 }

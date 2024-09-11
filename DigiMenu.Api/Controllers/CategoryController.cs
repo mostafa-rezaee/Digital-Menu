@@ -1,4 +1,5 @@
 ﻿using Common.NetCore;
+using DigiMenu.Api.Infrastructure;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
 using DigiMenu.Application.Categories.Remove;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    [Authorize]
+    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageCategories)]
     public class CategoryController : BaseApiController
     {
         private readonly ICategoryFacade _categoryFacade;
@@ -20,6 +21,7 @@ namespace DigiMenu.Api.Controllers
             _categoryFacade = categoryFacade;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ApiResult<List<CategoryDto>>> GetCategories()
         { 

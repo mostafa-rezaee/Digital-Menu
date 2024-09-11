@@ -1,5 +1,6 @@
 ﻿using Common.NetCore;
 using Common.NetCore.Utilities;
+using DigiMenu.Api.Infrastructure;
 using DigiMenu.Api.ViewModels.User;
 using DigiMenu.Application.Products.Create;
 using DigiMenu.Application.Products.Edit;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-
+    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
     public class UserController : BaseApiController
     {
         private readonly IUserFacade _userFacade;
@@ -51,6 +52,7 @@ namespace DigiMenu.Api.Controllers
             return QueryResult(result);
         }
 
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ChangePassword)]
         [HttpPut("ChangePassword")]
         public async Task<ApiResult> ChangePassword(ChangePasswordViewModel command)
         {

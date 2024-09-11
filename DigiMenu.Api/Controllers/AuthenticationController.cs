@@ -7,6 +7,8 @@ using DigiMenu.Api.ViewModels.UserAuthentication;
 using DigiMenu.Application.Users.Register;
 using DigiMenu.Presentation.Facade.Users;
 using DigiMenu.Query.Users.DTO;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UAParser;
@@ -49,6 +51,23 @@ namespace DigiMenu.Api.Controllers
             return CommandResult(commandResult);
         }
 
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<ApiResult> LogoutUser()
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+            if (token == null) return CommandResult(OperationResult.Error("اطلاعات کاربر یافت نشد"));
+
+            var userToken = await _userFacade.GetUserTokenByJwtToken(token);
+            if (userToken == null)
+            {
+                return CommandResult(OperationResult.NotFound());
+            }
+            var result = await _userFacade.RomoveToken(new Application.Users.RemoveToken.RemoveUserTokenComman(userToken.UserId, userToken.Id));
+
+            return CommandResult(result);
+        }
+
         [HttpPost("register")]
         public async Task<ApiResult> RegisterUser(RegisterUserViewModel viewModel)
         {
@@ -57,6 +76,7 @@ namespace DigiMenu.Api.Controllers
             return CommandResult(result);
         }
 
+        [Authorize]
         [HttpPost("RefreshToken")]
         public async Task<ApiResult<LoginUserResult?>> RefreshUserToken(string refreshToken)
         {

@@ -29,6 +29,7 @@ namespace DigiMenu.Presentation.Facade.Users
         Task<UserDto?> GetUserById(long id);
         Task<UserDto?> GetUserByUsername(string username);
         Task<UserTokenDto?> GetUserTokenByRefreshToken(string refreshToken);
+        Task<UserTokenDto?> GetUserTokenByJwtToken(string jwtToken);
         Task<UserFilterResult> GetUserByFilter(UserFilterParams filterParams);
     }
 }

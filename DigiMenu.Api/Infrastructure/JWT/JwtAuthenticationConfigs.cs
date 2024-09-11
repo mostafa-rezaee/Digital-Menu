@@ -18,7 +18,7 @@ namespace DigiMenu.Api.Infrastructure.JWT
                 option.TokenValidationParameters = new TokenValidationParameters()
                 {
                     IssuerSigningKey =
-                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtConfig:SignInKey"])),
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtConfig:SignInKey"]??"")),
                     ValidIssuer = configuration["JwtConfig:Issuer"],
                     ValidAudience = configuration["JwtConfig:Audience"],
                     ValidateLifetime = true,
@@ -27,15 +27,15 @@ namespace DigiMenu.Api.Infrastructure.JWT
                     ValidateAudience = true
                 };
                 option.SaveToken = true;
-                //option.Events = new JwtBearerEvents()
-                //{
-                //    OnTokenValidated = async context =>
-                //    {
-                //        var customValidate = context.HttpContext.RequestServices
-                //            .GetRequiredService<CustomJwtValidation>();
-                //        await customValidate.Validate(context);
-                //    }
-                //};
+                option.Events = new JwtBearerEvents()
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var customValidate = context.HttpContext.RequestServices
+                            .GetRequiredService<CustomJwtValidation>();
+                        await customValidate.Validate(context);
+                    }
+                };
             });
         }
     }
