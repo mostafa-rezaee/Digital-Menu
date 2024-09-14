@@ -1,4 +1,5 @@
-﻿using DigiMenu.Domain.UserAgg;
+﻿using DigiMenu.Domain.RoleAgg;
+using DigiMenu.Domain.UserAgg;
 using DigiMenu.Infrastracture.Persistent.EF;
 using DigiMenu.Query.Users.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -47,19 +48,22 @@ namespace DigiMenu.Query.Users
 
         public static async Task<UserDto> SetUserRoleTitles(this UserDto userDto, DigiMenuContext context)
         {
-            var roleIds = userDto.Roles.Select(r => r.RoleId);
-            var result = await context.Roles.Where(r => roleIds.Any() && roleIds.Contains(r.Id)).ToListAsync();
+            var roleIds = userDto.Roles.Select(r => r.RoleId).ToList();
             var roles = new List<UserRoleDto>();
-            foreach (var role in result)
+            if (roleIds.Any())
             {
-                roles.Add(new UserRoleDto()
-                {
-                    RoleId = role.Id,
-                    RoleTitle = role.Title
+                await context.Roles.ForEachAsync(x => {
+                    if (roleIds.Contains(x.Id))
+                    {
+                        roles.Add(new UserRoleDto()
+                        {
+                            RoleId = x.Id,
+                            RoleTitle = x.Title
+                        });
+                    }
                 });
+                userDto.Roles = roles;
             }
-
-            userDto.Roles = roles;
             return userDto;
         }
     }

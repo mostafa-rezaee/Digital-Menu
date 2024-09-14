@@ -1,6 +1,6 @@
 ﻿namespace DigiMenu.Domain.RoleAgg.Enums
 {
-    public enum Permissions : byte
+    public enum Permissions
     {
         ManageUsers = 1,
         ManageCategories = 2,

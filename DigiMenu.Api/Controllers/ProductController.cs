@@ -25,13 +25,27 @@ namespace DigiMenu.Api.Controllers
             _productFacade = productFacade;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ApiResult<ProductFilterResult>> GetProducts([FromQuery]ProductFilterParams filterParams)
         {
             var result = await _productFacade.GetProductByFilter(filterParams);
             return QueryResult(result);
         }
+
+        [AllowAnonymous]
+        [HttpGet("categoryProducts")]
+        public async Task<ApiResult<ProductFilterResult>> GetCategoryProducts(int page, int takeCount, long categoryId)
+        {
+            var result = await _productFacade.GetProductByFilter(new ProductFilterParams { 
+                CategoryId = categoryId,
+                PageCount = takeCount,
+                PageNumber = page,
+                Title = null
+
+            });
+            return QueryResult(result);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<ApiResult<ProductDto?>> GetProduct(long id)

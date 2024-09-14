@@ -19,11 +19,6 @@ namespace DigiMenu.Query.Products.GetByFilter
             var @params = request.FilterParam;
             var result = _context.Products.OrderByDescending(x=> x.CreateDate).AsQueryable();
 
-            if (@params.Id != null)
-            {
-                result =  result.Where(x => x.Id == @params.Id.Value);
-            }
-
             if (@params.Title != null)
             {
                 result = result.Where(x => x.Title.Contains(@params.Title));
