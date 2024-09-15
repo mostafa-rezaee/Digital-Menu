@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace DigiMenu.Application.Users.Edit
 {
-    public record EditUserCommand(long id, string firstName, string lastName, IFormFile? avatar, string username, string password) : IBaseCommand;
+    public record EditUserCommand(long id, string firstName, string lastName, IFormFile? avatar, string username) : IBaseCommand;
 }
