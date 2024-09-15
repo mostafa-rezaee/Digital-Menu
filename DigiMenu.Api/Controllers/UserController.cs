@@ -38,7 +38,7 @@ namespace DigiMenu.Api.Controllers
             return QueryResult(result);
         }
 
-        [HttpGet("uu/{username}")]
+        [HttpGet("ubun/{username}")]
         public async Task<ApiResult<UserDto?>> GetUserByUsername(string username)
         {
             var result = await _userFacade.GetUserByUsername(username);
