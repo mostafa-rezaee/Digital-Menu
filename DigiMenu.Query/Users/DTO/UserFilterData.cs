@@ -8,5 +8,6 @@ namespace DigiMenu.Query.Users.DTO
         public string LastName { get; set; }
         public string Username { get; set; }
         public string AvatarName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

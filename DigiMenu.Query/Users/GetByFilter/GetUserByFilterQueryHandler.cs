@@ -18,9 +18,13 @@ namespace DigiMenu.Query.Users.GetByFilter
         {
             var @params = request.FilterParam;
             var users = _context.Users.OrderBy(x=>x.LastName).ThenBy(x=>x.FirstName).AsQueryable();
-            if (@params.Id != null)
+            if (@params.FirstName != null)
             {
-                users = users.Where(x => x.Id == @params.Id);
+                users = users.Where(x => x.FirstName.Contains(@params.FirstName));
+            }
+            if (@params.LastName != null)
+            {
+                users = users.Where(x => x.FirstName.Contains(@params.LastName));
             }
             if (@params.Username != null)
             {

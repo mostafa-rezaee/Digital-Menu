@@ -42,7 +42,8 @@ namespace DigiMenu.Query.Users
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Id = user.Id,
-                Username = user.Username
+                Username = user.Username,
+                IsActive = user.IsActive,
             };
         }
 
