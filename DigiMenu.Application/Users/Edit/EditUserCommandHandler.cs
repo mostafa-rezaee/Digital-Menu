@@ -24,18 +24,18 @@ namespace DigiMenu.Application.Users.Edit
 
         public async Task<OperationResult> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetTrackingAsync(request.id);
+            var user = await _userRepository.GetTrackingAsync(request.Id);
             if (user == null) return OperationResult.NotFound();
 
-            user.Edit(request.firstName, request.lastName, request.username, _domainUseService);
+            user.Edit(request.FirstName, request.LastName, request.Username, _domainUseService);
             var oldAvatarImage = user.AvatarName;
-            if (request.avatar != null)
+            if (request.Avatar != null)
             {
-                var avatarImageName = await _fileService.SaveFileAndGenerateName(request.avatar, Directories.AvatarImage);
+                var avatarImageName = await _fileService.SaveFileAndGenerateName(request.Avatar, Directories.AvatarImage);
                 user.SetAvatarImage(avatarImageName);
 
             }
-            DeleteOldAvatarImage(request.avatar, oldAvatarImage);
+            DeleteOldAvatarImage(request.Avatar, oldAvatarImage);
 
             await _userRepository.SaveAsync();
 

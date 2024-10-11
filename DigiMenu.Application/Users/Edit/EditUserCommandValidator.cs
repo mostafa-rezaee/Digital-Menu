@@ -7,10 +7,10 @@ namespace DigiMenu.Application.Users.Edit
     {
         public EditUserCommandValidator()
         {
-            RuleFor(x => x.firstName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام"));
-            RuleFor(x => x.lastName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام خانوادگی"));
-            RuleFor(x => x.username).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام کاربری"));
-            RuleFor(x => x.avatar).JustImageFile();
+            RuleFor(x => x.FirstName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام"));
+            RuleFor(x => x.LastName).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام خانوادگی"));
+            RuleFor(x => x.Username).NotNull().NotEmpty().WithMessage(ValidationMessages.required("نام کاربری"));
+            RuleFor(x => x.Avatar).JustImageFile();
 
 
         }

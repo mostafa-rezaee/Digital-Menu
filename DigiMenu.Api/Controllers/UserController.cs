@@ -9,12 +9,13 @@ using DigiMenu.Application.Users.Edit;
 using DigiMenu.Presentation.Facade.Products;
 using DigiMenu.Presentation.Facade.Users;
 using DigiMenu.Query.Users.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
+    [Authorize]
     public class UserController : BaseApiController
     {
         private readonly IUserFacade _userFacade;
@@ -25,6 +26,7 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpGet]
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
         public async Task<ApiResult<UserFilterResult>> GetUsers([FromQuery]UserFilterParams filterParams)
         {
             var result = await _userFacade.GetUserByFilter(filterParams);
@@ -32,6 +34,7 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
         public async Task<ApiResult<UserDto?>> GetUserById(long id)
         {
             var result = await _userFacade.GetUserById(id);
@@ -52,7 +55,7 @@ namespace DigiMenu.Api.Controllers
             return QueryResult(result);
         }
 
-        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ChangePassword)]
+        
         [HttpPut("ChangePassword")]
         public async Task<ApiResult> ChangePassword(ChangePasswordViewModel command)
         {
@@ -66,6 +69,7 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpPost]
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
         public async Task<ApiResult> CreateUser(CreateUserCommand command)
         {
             var result = await _userFacade.Create(command);
@@ -73,9 +77,22 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ApiResult> EditUser([FromForm] EditUserCommand command)
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
+        public async Task<ApiResult> Edit([FromForm] EditUserCommand command)
         {
             var result = await _userFacade.Edit(command);
+            return CommandResult(result);
+        }
+
+        [HttpPut("Current")]
+        public async Task<ApiResult> EditUser([FromForm] EditUserViewModel command)
+        {
+            var result = await _userFacade.Edit(new EditUserCommand(
+                User.GetUserId(),
+                command.FirstName,
+                command.LastName,
+                command.Avatar,
+                command.Username));
             return CommandResult(result);
         }
 
