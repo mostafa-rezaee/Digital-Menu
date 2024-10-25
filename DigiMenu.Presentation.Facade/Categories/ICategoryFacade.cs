@@ -14,7 +14,7 @@ namespace DigiMenu.Presentation.Facade.Categories
     public interface ICategoryFacade
     {
         //Commands
-        Task<OperationResult<long>> Create(CreateCategoryCommand command);
+        Task<OperationResult> Create(CreateCategoryCommand command);
         Task<OperationResult> Edit(EditCategoryCommand command);
         Task<OperationResult> Remove(long id);
 

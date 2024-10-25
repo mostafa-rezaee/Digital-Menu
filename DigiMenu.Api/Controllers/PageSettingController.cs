@@ -1,5 +1,6 @@
 ﻿using Common.NetCore;
 using DigiMenu.Api.Infrastructure;
+using DigiMenu.Api.ViewModels.PageSetting;
 using DigiMenu.Application.PageSettings.Create;
 using DigiMenu.Application.PageSettings.Edit;
 using DigiMenu.Application.Products.Create;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManagePageSettings)]
+    
     public class PageSettingController : BaseApiController
     {
         private readonly IPageSettingFacade _pageSettingFacade;
@@ -33,16 +34,22 @@ namespace DigiMenu.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ApiResult> CreatePageSetting([FromForm] CreatePageSettingCommand command)
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManagePageSettings)]
+        public async Task<ApiResult> CreatePageSetting([FromForm] CreatePageSettingModel command)
         {
-            var result = await _pageSettingFacade.Create(command);
+            var result = await _pageSettingFacade.Create(new CreatePageSettingCommand(
+                command.PageTitle, command.BackgroundImageFile, command.LogoImageFile, command.WebsiteAddress, 
+                command.SocialTitle, command.SocialAddress, command.Telephone, command.Address));
             return CommandResult(result);
         }
 
         [HttpPut]
-        public async Task<ApiResult> EditPageSetting([FromForm] EditPageSettingCommand command)
+        [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManagePageSettings)]
+        public async Task<ApiResult> EditPageSetting([FromForm] EditPageSettingModel command)
         {
-            var result = await _pageSettingFacade.Edit(command);
+            var result = await _pageSettingFacade.Edit(new EditPageSettingCommand(
+                command.Id, command.PageTitle, command.BackgroundImageFile, command.LogoImageFile, command.WebsiteAddress,
+                command.SocialTitle, command.SocialAddress, command.Telephone, command.Address));
             return CommandResult(result);
         }
     }

@@ -23,7 +23,7 @@ namespace DigiMenu.Presentation.Facade.Categories
             this.mediator = mediator;
         }
 
-        public async Task<OperationResult<long>> Create(CreateCategoryCommand command)
+        public async Task<OperationResult> Create(CreateCategoryCommand command)
         {
             return await mediator.Send(command);
         }

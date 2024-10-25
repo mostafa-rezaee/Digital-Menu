@@ -22,7 +22,7 @@ namespace DigiMenu.Application.PageSettings.Create
             var hasRecord = await _pageSettingRepository.HasRecordAsync();
             if (hasRecord)
             {
-                throw new InvalidDomainDataException("تنظیمات منو قبلا ثبت شده است. لطفا در صورت نیاز ویرایش کنید");
+                return OperationResult.Error("تنظیمات منو قبلا ثبت شده است. لطفا در صورت نیاز ویرایش کنید");
             }
 
             var backgroundImageName = await _fileService.SaveFileAndGenerateName(request.backgroundImage, Directories.PageImage);

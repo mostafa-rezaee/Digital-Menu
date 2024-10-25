@@ -1,5 +1,7 @@
-﻿using Common.NetCore;
+﻿using Common.Domain.ValueObjects;
+using Common.NetCore;
 using DigiMenu.Api.Infrastructure;
+using DigiMenu.Api.ViewModels.Category;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
 using DigiMenu.Application.Categories.Remove;
@@ -11,7 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageCategories)]
+    //[PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageCategories)]
+    [Authorize]
     public class CategoryController : BaseApiController
     {
         private readonly ICategoryFacade _categoryFacade;
@@ -37,17 +40,23 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult<long>> CreateCategory([FromForm] CreateCategoryCommand command)
+        public async Task<ApiResult> CreateCategory([FromForm] CreateCategoryViewModel command)
         {
-            var result = await _categoryFacade.Create(command);
-            var url = Url.Action("GetCategoryById", "category", new { id = result.Data});
-            return CommandResult(result, System.Net.HttpStatusCode.Created, url??"");
+            var seoData = new SeoData(command.SeoData.MetaDescription, command.SeoData.MetaTitle, 
+                command.SeoData.MetaKeywords, command.SeoData.IsIndexed, command.SeoData.Canonicial, command.SeoData.Schema);
+            var result = await _categoryFacade.Create(new CreateCategoryCommand(
+                command.Title, command.Image,command.IsVisible, seoData));
+            //var url = Url.Action("GetCategoryById", "category", new { id = result.Data});
+            return CommandResult(result); //, System.Net.HttpStatusCode.Created, url??"");
         }
 
         [HttpPut]
-        public async Task<ApiResult> EditCategory([FromForm] EditCategoryCommand command)
+        public async Task<ApiResult> EditCategory([FromForm] EditCategoryViewModel command)
         {
-            var result = await _categoryFacade.Edit(command);
+            var seoData = new SeoData(command.SeoData.MetaDescription, command.SeoData.MetaTitle,
+                command.SeoData.MetaKeywords, command.SeoData.IsIndexed, command.SeoData.Canonicial, command.SeoData.Schema);
+            var result = await _categoryFacade.Edit(new EditCategoryCommand(
+                command.Id, command.Title, command.Image, command.IsVisible, seoData));
             return CommandResult(result);
         }
 

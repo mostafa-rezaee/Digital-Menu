@@ -1,4 +1,5 @@
-﻿using Common.NetCore;
+﻿using Common.Application.Utilities.Security;
+using Common.NetCore;
 using Common.NetCore.Utilities;
 using DigiMenu.Api.Infrastructure;
 using DigiMenu.Api.ViewModels.User;
@@ -9,6 +10,7 @@ using DigiMenu.Application.Users.Edit;
 using DigiMenu.Presentation.Facade.Products;
 using DigiMenu.Presentation.Facade.Users;
 using DigiMenu.Query.Users.DTO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -70,17 +72,25 @@ namespace DigiMenu.Api.Controllers
 
         [HttpPost]
         [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
-        public async Task<ApiResult> CreateUser(CreateUserCommand command)
+        public async Task<ApiResult> Create(CreateUserViewModel command)
         {
-            var result = await _userFacade.Create(command);
+            var result = await _userFacade.Create(new CreateUserCommand(
+                command.FirstName, command.LastName, command.Username, command.Password));
             return CommandResult(result);
         }
 
         [HttpPut]
         [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageUsers)]
-        public async Task<ApiResult> Edit([FromForm] EditUserCommand command)
+        public async Task<ApiResult> EditByAdmin([FromForm] EditUserByAdminViewModel command)
         {
-            var result = await _userFacade.Edit(command);
+            var result = await _userFacade.Edit(new EditUserCommand(
+                    User.GetUserId(),
+                    command.FirstName,
+                    command.LastName,
+                    command.AvatarImage,
+                    command.Username,
+                    command.IsActive
+                ));
             return CommandResult(result);
         }
 
@@ -92,7 +102,8 @@ namespace DigiMenu.Api.Controllers
                 command.FirstName,
                 command.LastName,
                 command.Avatar,
-                command.Username));
+                command.Username,
+                null));
             return CommandResult(result);
         }
 

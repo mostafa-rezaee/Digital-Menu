@@ -17,7 +17,12 @@ namespace DigiMenu.Query.Products.GetByFilter
         public async Task<ProductFilterResult> Handle(GetProductByFilterQuery request, CancellationToken cancellationToken)
         {
             var @params = request.FilterParam;
-            var result = _context.Products.OrderByDescending(x=> x.CreateDate).AsQueryable();
+            var result = _context.Products.Include("Category").OrderByDescending(x=> x.CreateDate).AsQueryable();
+
+            if (@params.Id != null)
+            {
+                result = result.Where(x => x.Id == @params.Id.Value);
+            }
 
             if (@params.Title != null)
             {

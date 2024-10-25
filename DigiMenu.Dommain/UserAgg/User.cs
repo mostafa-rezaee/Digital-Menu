@@ -36,15 +36,19 @@ namespace DigiMenu.Domain.UserAgg
 
         #region Methods
 
-        public void Edit(string firstName, string lastName, string username, IUserDomainService userService)
+        public void Edit(string firstName, string lastName, string username, bool? isActive, IUserDomainService userService)
         {
             HandlePropertiesValidation(username, userService);
             FirstName = firstName;
             LastName = lastName;
             Username = username;
+            if (isActive != null)
+            {
+                IsActive = isActive.Value;
+            }
         }
 
-        public void AddRoles(List<UserRole> roles) 
+        public void AddRoles(List<UserRole> roles)
         {
             roles.ForEach(role => role.UserId = Id);
             Roles.Clear();
@@ -65,7 +69,7 @@ namespace DigiMenu.Domain.UserAgg
             var token = new UserToken(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
             token.UserId = Id;
             UserTokens.Add(token);
-            
+
         }
 
         public void RemoveUserToken(long tokenId)
@@ -83,6 +87,11 @@ namespace DigiMenu.Domain.UserAgg
                 NullOrEmptyException.CheckNotEmpty(password, nameof(password));
             }
 
+            //if (HasManageAccess(Id))
+            //{
+            //    return;
+            //}
+
             if (username != Username)
             {
                 if (userService.IsUsernameExist(username))
@@ -92,6 +101,12 @@ namespace DigiMenu.Domain.UserAgg
             }
 
         }
+
+        //private bool HasManageAccess(long userId)
+        //{
+        //    return false;
+
+        //}
 
         public static User RegisterUser(string username, string password, IUserDomainService userService)
         {

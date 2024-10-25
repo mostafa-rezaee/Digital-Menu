@@ -16,7 +16,7 @@ namespace DigiMenu.Query.PageSettings.Get
 
         public async Task<PageSettingDto?> Handle(GetPageSettingQuery request, CancellationToken cancellationToken)
         {
-            var model = await _context.PageSettings.FirstAsync(cancellationToken);
+            var model = await _context.PageSettings.FirstOrDefaultAsync(cancellationToken);
             return model.Map();
         }
     }

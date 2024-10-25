@@ -19,9 +19,9 @@ namespace DigiMenu.Application.Products.Create
 
         public async Task<OperationResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            string imageName = await _fileService.SaveFileAndGenerateName(request.image, Directories.ProductImage);
-            var product = new Product(request.title, request.categoryId, imageName, request.price, request.likeCount, request.isVisible,
-                request.description, request.seoData/*, request.specifications*/);
+            string imageName = await _fileService.SaveFileAndGenerateName(request.Image, Directories.ProductImage);
+            var product = new Product(request.Title, request.CategoryId, imageName, request.Price, request.LikeCount, request.IsVisible,
+                request.Description, request.SeoData/*, request.specifications*/);
 
             await _repository.AddAsync(product);
 

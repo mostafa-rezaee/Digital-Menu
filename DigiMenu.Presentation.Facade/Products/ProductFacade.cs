@@ -50,9 +50,9 @@ namespace DigiMenu.Presentation.Facade.Products
             return await mediator.Send(new GetProductByIdQuery(id));
         }
 
-        public Task<OperationResult> RemoveImage(RemoveProductImageCommand command)
+        public async Task<OperationResult> RemoveImage(RemoveProductImageCommand command)
         {
-            throw new NotImplementedException();
+            return await mediator.Send(command);
         }
     }
 }

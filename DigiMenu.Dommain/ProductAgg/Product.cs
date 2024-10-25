@@ -1,6 +1,7 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.ValueObjects;
+using DigiMenu.Domain.CategoryAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace DigiMenu.Domain.ProductAgg
     public class Product : AggregateRoot
     {
         private Product() { }
-        public Product(string title, long categoryId, string imageName, decimal price, int likeCount, bool isVisible, 
+        public Product(string title, long categoryId, string imageName, decimal price, int? likeCount, bool isVisible, 
                         string description, SeoData seoData)
         {
             NullOrEmptyException.CheckNotEmpty(imageName, nameof(imageName));
@@ -36,6 +37,7 @@ namespace DigiMenu.Domain.ProductAgg
         public bool? IsVisible { get; private set; }
         public string? Description { get; private set; }
         public SeoData SeoData { get; private set; }
+        public Category Category { get; private set; }
         public List<ProductImage> ProductImages { get; private set; }
 
         //When we have any product specification
@@ -43,7 +45,7 @@ namespace DigiMenu.Domain.ProductAgg
 
         #region Methods
 
-        public void Edit(string title, long categoryId, decimal price, int likeCount, bool isVisible,
+        public void Edit(string title, long categoryId, decimal price, int? likeCount, bool isVisible,
                         string description, SeoData seoData)
         {
             HandleValidating(title, price, description);
@@ -80,8 +82,8 @@ namespace DigiMenu.Domain.ProductAgg
         private void HandleValidating(string title, decimal price, string description)
         {
             NullOrEmptyException.CheckNotEmpty(title, nameof(title));
-            NullOrEmptyException.CheckNotEmpty(description, nameof(description));
-            if (price <= 0)
+            //NullOrEmptyException.CheckNotEmpty(description, nameof(description));
+            if (price < 0)
                 throw new InvalidDomainDataException("این مبلغ مجاز نیست");
         }
 

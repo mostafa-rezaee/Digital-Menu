@@ -57,11 +57,13 @@ namespace DigiMenu.Query.Products
             return new ProductFilterData()
             {
                 Id = product.Id,
+                CategoryTitle = product.Category.Title,
                 CreateDate = product.CreateDate,
                 ImageName = product.ImageName,
                 Description = product.Description,
                 Title = product.Title,
                 LikeCount= product.LikeCount,
+                IsVisible = product.IsVisible??true,
                 Price = product.Price,
             };
         }

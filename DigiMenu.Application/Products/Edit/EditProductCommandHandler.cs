@@ -39,7 +39,7 @@ namespace DigiMenu.Application.Products.Edit
             return OperationResult.Success();
         }
 
-        private void RemoveOldImage(IFormFile oldImageFile, string oldImageName)
+        private void RemoveOldImage(IFormFile? oldImageFile, string oldImageName)
         {
             if (oldImageFile != null)
             {

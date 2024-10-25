@@ -5,7 +5,7 @@ using DigiMenu.Domain.CategoryAgg;
 
 namespace DigiMenu.Application.Categories.Create
 {
-    public class CreateCategoryCommandHandler : IBaseCommandHandler<CreateCategoryCommand, long>
+    public class CreateCategoryCommandHandler : IBaseCommandHandler<CreateCategoryCommand>
     {
         private readonly ICategoryRepository _repository;
         private readonly IFileService _fileService;
@@ -16,14 +16,14 @@ namespace DigiMenu.Application.Categories.Create
             _fileService = fileService;
         }
 
-        public async Task<OperationResult<long>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
-            string imageName = await _fileService.SaveFileAndGenerateName(request.image, Directories.CategoryImage);
-            var category = new Category(request.title, imageName, request.isVisible, request.seoData);
+            string imageName = await _fileService.SaveFileAndGenerateName(request.Image, Directories.CategoryImage);
+            var category = new Category(request.Title, imageName, request.IsVisible, request.SeoData);
             await _repository.AddAsync(category);
             await _repository.SaveAsync();
 
-            return OperationResult<long>.Success(category.Id);
+            return OperationResult.Success();
         }
     }
 }

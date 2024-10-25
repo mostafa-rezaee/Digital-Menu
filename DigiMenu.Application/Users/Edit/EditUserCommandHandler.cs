@@ -27,7 +27,7 @@ namespace DigiMenu.Application.Users.Edit
             var user = await _userRepository.GetTrackingAsync(request.Id);
             if (user == null) return OperationResult.NotFound();
 
-            user.Edit(request.FirstName, request.LastName, request.Username, _domainUseService);
+            user.Edit(request.FirstName, request.LastName, request.Username, request.IsActive, _domainUseService);
             var oldAvatarImage = user.AvatarName;
             if (request.Avatar != null)
             {

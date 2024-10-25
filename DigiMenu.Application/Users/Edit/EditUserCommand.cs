@@ -10,19 +10,21 @@ namespace DigiMenu.Application.Users.Edit
 {
     public class EditUserCommand : IBaseCommand
     {
-        public EditUserCommand(long id, string firstName, string lastName, IFormFile? avatar, string username)
+        public EditUserCommand(long id, string firstName, string lastName, IFormFile? avatar, string username, bool? isActive)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Username = username;
             Avatar = avatar;
+            IsActive = isActive;
         }
 
         public long Id { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Username { get; private set; }
+        public bool? IsActive { get; private set; }
         public IFormFile? Avatar { get; private set; }
     }
 }

@@ -17,7 +17,7 @@ namespace DigiMenu.Query.Users.GetById
         public async Task<UserDto?> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-            return user.Map();
+            return await user.Map().SetUserRoleTitles(_context);
         }
     }
 }

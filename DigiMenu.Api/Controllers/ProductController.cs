@@ -1,5 +1,7 @@
-﻿using Common.NetCore;
+﻿using Common.Domain.ValueObjects;
+using Common.NetCore;
 using DigiMenu.Api.Infrastructure;
+using DigiMenu.Api.ViewModels.Product;
 using DigiMenu.Application.Categories.Create;
 using DigiMenu.Application.Categories.Edit;
 using DigiMenu.Application.Products.AddImage;
@@ -15,7 +17,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiMenu.Api.Controllers
 {
-    [PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageProducts)]
+    //[PermissionCheck(Domain.RoleAgg.Enums.Permissions.ManageProducts)]
+    [Authorize]
     public class ProductController : BaseApiController
     {
         private readonly IProductFacade _productFacade;
@@ -55,30 +58,44 @@ namespace DigiMenu.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> CreateProduct([FromForm]CreateProductCommand command)
+        public async Task<ApiResult> CreateProduct([FromForm]CreateProductViewModel command)
         {
-            var result = await _productFacade.Create(command);
+            var seoData = new SeoData(command.SeoData.MetaDescription, command.SeoData.MetaTitle,
+                command.SeoData.MetaKeywords, command.SeoData.IsIndexed, command.SeoData.Canonicial, command.SeoData.Schema);
+
+            var result = await _productFacade.Create(new CreateProductCommand(command.Title, command.CategoryId, command.Image, command.Price,
+                command.LikeCount, command.IsVisible, command.Description, seoData));
             return CommandResult(result);
         }
 
         [HttpPut]
-        public async Task<ApiResult> EditProduct([FromForm]EditProductCommand command)
+        public async Task<ApiResult> EditProduct([FromForm]EditProductViewModel command)
         {
-            var result = await _productFacade.Edit(command);
+            var seoData = new SeoData(command.SeoData.MetaDescription, command.SeoData.MetaTitle,
+                command.SeoData.MetaKeywords, command.SeoData.IsIndexed, command.SeoData.Canonicial, command.SeoData.Schema);
+
+            var result = await _productFacade.Edit(new EditProductCommand(command.Id, command.Title, command.CategoryId, command.Image, command.Price,
+                command.LikeCount, command.IsVisible, command.Description, seoData));
             return CommandResult(result);
         }
 
         [HttpPost("image")]
-        public async Task<ApiResult> AddProductImage([FromForm] AddProductImageCommand command)
+        public async Task<ApiResult> AddProductImage([FromForm] AddProductImageViewModel command)
         {
-            var result = await _productFacade.AddImage(command);
+            var result = await _productFacade.AddImage(new AddProductImageCommand(
+                command.ImageFile, 
+                command.ProductId, 
+                command.DisplayOrder));
             return CommandResult(result);
         }
 
         [HttpDelete("image")]
-        public async Task<ApiResult> RemoveProductImage(RemoveProductImageCommand command)
+        public async Task<ApiResult> RemoveProductImage(RemoveProductImageViewModel command)
         {
-            var result = await _productFacade.RemoveImage(command);
+            var result = await _productFacade.RemoveImage(new RemoveProductImageCommand(
+                command.ImageId,
+                command.ProductId,
+                command.DisplayOrder));
             return CommandResult(result);
         }
 
